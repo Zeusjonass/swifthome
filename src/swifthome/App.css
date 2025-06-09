@@ -1,0 +1,517 @@
+@import url('https://fonts.googleapis.com/css2?family=Average+Sans&family=Rufina:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+:root {
+  --black: #000;
+  --white: #FFF;
+  --gold: #DECB97;
+  /* --title-font: "Rufina", serif; */
+  --text-font: 'Poppins', sans-serif;
+  --title-font:'Poppins', sans-serif;
+}
+
+body {
+  font-family: var(--text-font)!important;
+  overflow-x: hidden;
+}
+
+html {
+	scroll-behavior: smooth;
+  }
+
+.authenticator-container {
+  background-color: var(--black);
+}
+
+#text-container{
+  gap:1.2rem;
+}
+
+[data-amplify-authenticator] {
+  z-index: 2;
+  background: none;
+  position: relative;
+}
+
+/*Form login*/
+[data-amplify-authenticator] [data-amplify-router] {
+  border: none !important;
+  background: none;
+}
+
+.css-csmqbv-MuiPaper-root-MuiDialog-paper{
+	width: fit-content!important;
+}
+#signIn-tab {
+  font-family: var(--text-font);
+  font-weight: 400;
+  font-size: 3rem;
+  color: white;
+}
+
+.amplify-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--text-font);
+  color: white !important;
+}
+
+.amplify-input {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--gold);
+  border-color: "transparent";
+  color: white !important;
+}
+
+.amplify-button--small {
+  color: var(--gold);
+  font-weight: 400 !important;
+}
+
+#signIn-panel>div>form>div>fieldset>div.amplify-flex.amplify-field.amplify-textfield.amplify-passwordfield>div>div.amplify-field-group__outer-end>button {
+  border: 2px solid var(--gold);
+  border-left: none;
+}
+
+#signIn-panel span.amplify-icon>svg>path {
+  color: white;
+}
+
+.amplify-tabs__list--equal {
+  border: none;
+}
+
+.amplify-button--primary {
+  margin: 1rem auto 0 auto;
+  padding: 0.75rem;
+  display: block;
+  text-decoration: none;
+  background-color: var(--gold);
+  color: var(--black);
+  text-align: center;
+  border: var(--gold);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 200px;
+  font-weight: 400;
+}
+
+#signIn-tab,
+#particles-js>div:nth-child(2)>div>div>div>div.amplify-tabs__list--equal {
+  border: none;
+}
+
+canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+div.authenticator-container {
+  height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0rem 6rem;
+}
+[data-amplify-authenticator]{
+	width:100%;
+}
+[data-amplify-authenticator] [data-amplify-router] {
+  border-color: transparent;
+}
+
+.amplify-button--primary {
+  background-color: rgb(180, 236, 252) !important;
+  color: var(--black) !important;
+}
+
+.amplify-button--primary:hover {
+  color: white !important;
+}
+
+.amplify-button--small {
+  color: white !important;
+}
+
+.amplify-button--small:hover {
+  color: var(--gold) !important;
+  background-color: transparent;
+}
+
+#particles-js>img {
+  z-index: 1;
+}
+
+.amplify-button.amplify-field-group__control.amplify-field__show-password {
+  background-color: black !important;
+  color: white !important;
+}
+
+.amplify-button.amplify-field-group__control.amplify-field__show-password:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+.amplify-heading.amplify-heading--3 {
+  color: white !important;
+}
+
+@media (min-width: 475px) and (max-width: 900px) {
+  #amplify-id-\\3A r4\\3A {
+    width: 160px !important;
+  }
+  #amplify-id-\\3A ra\\3A {
+    width: 144px !important;
+  }
+  .amplify-button
+  .amplify-field-group__control
+  .amplify-field__show-password {
+    width: 16px !important;
+  }
+}
+
+/* Questions Page*/
+.MuiStepConnector-vertical{
+	margin: 0 !important;
+}
+/* Chat Page*/
+.chat-container {
+	height: calc(100vh - 20px);
+	margin: 0;
+	background: var(--black);
+}
+
+.chat {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.card {
+	height: 500px;
+	border-radius: 15px !important;
+	background-color: rgba(255, 255, 255, 0.3) !important;
+	z-index: 1;
+}
+
+.msg_card_body {
+	overflow-y: auto;
+	scroll-behavior: smooth;
+	position: relative;
+	height: 400px;
+}
+
+.card-header {
+	border-radius: 15px 15px 0 0 !important;
+	border-bottom: 0 !important;
+}
+
+.card-footer {
+	border-radius: 0 0 15px 15px !important;
+	border-top: 0 !important;
+}
+
+.container {
+	align-content: center;
+}
+
+.search {
+	border-radius: 15px 0 0 15px !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+}
+
+.search:focus {
+	box-shadow: none !important;
+	outline: 0px !important;
+}
+
+.type_msg {
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	height: 60px !important;
+	overflow-y: auto;
+}
+
+.type_msg:focus {
+	box-shadow: none !important;
+	outline: 0px !important;
+}
+
+.attach_btn {
+	border-radius: 15px 0 0 15px !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	cursor: pointer;
+}
+
+.send_btn {
+	border-radius: 0 15px 15px 0 !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	cursor: pointer;
+}
+
+.search_btn {
+	border-radius: 0 15px 15px 0 !important;
+	background-color: rgba(0, 0, 0, 0.3) !important;
+	border: 0 !important;
+	color: white !important;
+	cursor: pointer;
+}
+
+.contacts {
+	list-style: none;
+	padding: 0;
+}
+
+.contacts li {
+	width: 100% !important;
+	padding: 5px 10px;
+	margin-bottom: 15px !important;
+}
+
+.active {
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+.user_img {
+	height: 60px;
+	width: 60px;
+	border: 1.5px solid #f5f6fa;
+}
+
+.user_img_msg {
+	height: 40px;
+	width: 40px;
+	border: 1.5px solid #f5f6fa;
+}
+
+.img_cont {
+	position: relative;
+	height: 70px;
+	width: 70px;
+}
+
+.img_cont_msg {
+	height: 40px;
+	width: 40px;
+}
+
+.online_icon {
+	position: absolute;
+	height: 15px;
+	width: 15px;
+	background-color: #4cd137;
+	border-radius: 50%;
+	bottom: 13px;
+	right: 13px;
+	border: 1.5px solid white;
+}
+
+.offline {
+	background-color: #c23616 !important;
+}
+
+.user_info {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: 15px;
+}
+
+.user_info span {
+	font-size: 20px;
+	color: white;
+}
+
+.user_info p {
+	font-size: 10px;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.video_cam {
+	margin-left: 50px;
+	margin-top: 5px;
+}
+
+.video_cam span {
+	color: white;
+	font-size: 20px;
+	cursor: pointer;
+	margin-right: 20px;
+}
+
+.msg_cotainer {
+	margin-top: auto;
+	margin-bottom: auto;
+	margin-left: 10px;
+	border-radius: 25px;
+	background-color: var(--gold);
+	padding: 10px;
+	position: relative;
+}
+
+.msg_cotainer_send {
+	min-width: 75px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 10px;
+    border-radius: 25px;
+    background-color: #16273B;
+    color: white;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+}
+
+.msg_time {
+	position: absolute;
+	left: 0;
+	bottom: -1.5rem;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 10px;
+}
+
+.msg_time_send {
+	position: absolute;
+	right: 0;
+	bottom: -1.5rem;
+	color: rgba(255, 255, 255, 0.5);
+	font-size: 10px;
+}
+
+.msg_head {
+	position: relative;
+}
+
+#action_menu_btn {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	color: white;
+	cursor: pointer;
+	font-size: 20px;
+}
+
+.action_menu {
+	z-index: 1;
+	position: absolute;
+	padding: 15px 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	color: white;
+	border-radius: 15px;
+	top: 30px;
+	right: 15px;
+	display: none;
+}
+
+.action_menu ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.action_menu ul li {
+	width: 100%;
+	padding: 10px 15px;
+	margin-bottom: 5px;
+}
+
+.action_menu ul li i {
+	padding-right: 10px;
+}
+
+.action_menu ul li:hover {
+	cursor: pointer;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.MuiButton-icon{
+	margin:0!important;
+}
+.MuiStepLabel-iconContainer{
+	padding: 0!important;
+}
+.MuiStepLabel-vertical{
+	padding:0!important;
+	background-color: transparent;
+}
+.MuiStepIcon-text{
+	font-size: 1rem!important;
+    font-family: var(--title-font)!important;
+    font-weight: 700;
+}
+.Mui-active{
+	color: #16273B!important;
+}
+button.Mui-disabled{
+	background-color: lightgray!important;
+}
+.MuiStepConnector-root{
+	padding: 0 27px;
+}
+.MuiSelect-select{
+	font-family: var(--title-font)!important;
+}
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+@media only screen and (max-width: 899px) {
+  #text-container h1{
+    font-size: 3rem!important;
+  }
+  div.authenticator-container{
+    justify-content: center;
+    padding: 0;
+  }
+}
+@media(max-width: 576px) {
+	.contacts_card {
+		margin-bottom: 15px !important;
+	}
+  #text-container h1{
+    font-size: 1.6rem!important;
+	width: 100%;
+  }
+
+  .lottieChat {
+	box-sizing: border-box;
+	width: 3rem!important;
+  }
+}
+@media only screen and (max-width: 1355px) and (min-width: 900px)  {
+  #text-container h1{
+    font-size: 3.2rem!important;
+  }
+  .lottie{
+    width:50%!important;
+  }
+}
+a:hover {
+	text-decoration: none;
+}
+  

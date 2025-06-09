@@ -1,95 +1,77 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+import { useEffect, useState } from 'react';
+import { Box, CircularProgress, Grid } from '@mui/material';
+import { useAuthenticator } from '@aws-amplify/ui-react';
+import { InitializeAssistantResponse, useQuestionsByUserIdQuery } from "@/src/swifthome/api";
+import QuestionsCarousel from "@/src/swifthome/components/questions/QuestionsCarousel";
+import InitializeUserQuestions from "@/src/swifthome/components/questions/InitializeUserQuestions";
+import { useRouter } from 'next/navigation';
 
-export default function Home() {
+const HomePage = () => {
+  const { user } = useAuthenticator((context) => [context.user]);
+  const navigate = useRouter();
+
+  const [initializeAssistantResponse, setInitializeAssistantResponse] = useState<InitializeAssistantResponse | undefined>(undefined);
+
+  const { data: questions, isLoading } = useQuestionsByUserIdQuery(user?.userId);
+
+  useEffect(() => {
+    if (user === undefined) {
+      navigate.push('/login');
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "/initParticles.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  if (isLoading) {
+    return (
+      <Box id="particles-js" display="flex" justifyContent="center" alignItems="center" height="100vh">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <Box id="particles-js" sx={{ height: "100vh", backgroundColor: "black" }} display="flex" justifyContent="center" alignItems="center">
+      {initializeAssistantResponse ? (
+        // <ChatPage
+        //   sessionId={initializeAssistantResponse.sessionId} 
+        //   clientId={initializeAssistantResponse.clientId}
+        //   userId={user?.userId}
+        // />
+        <></>
+      ) : (
+        <Grid
+          container
+          justifyContent="center"
+          className="questions-container"
+          sx={{
+            height:{md:'60vh'},
+            zIndex: "1",
+            width:"85%",
+          }}>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+          {questions && questions.length > 0 ? (
+            <QuestionsCarousel
+              questions={questions}
+              setInitializeAssistantResponse={setInitializeAssistantResponse}
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          ) : (
+            <InitializeUserQuestions userId={user?.userId} />
+          )}
+        </Grid>
+      )}
+    </Box>
   );
-}
+};
+
+export default HomePage;
