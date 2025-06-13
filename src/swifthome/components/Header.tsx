@@ -1,6 +1,6 @@
 "use client"
 import { Box, Button, Link } from '@mui/material';
-import logo from '../images/logo_deux.png'
+import LogoDeux from '../images/logo_deux.png'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { styled } from '@mui/material';
@@ -164,7 +164,7 @@ const Header = () => {
 
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Link href="/">
-            <img src={'./../images/logo_deux.png'} style={{ width: '8rem' }} alt="logo" />
+            <img src={LogoDeux.src} style={{ width: '8rem' }} alt="logo" />
           </Link>
         </Box>
        
