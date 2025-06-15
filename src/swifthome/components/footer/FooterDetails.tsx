@@ -113,10 +113,10 @@ function FooterDetails() {
               '&:hover': { bgcolor: '#0957A0' }
             }
           }}>
-            <a href="#"><img src={facebook} alt="icono facebook" /></a>
-            <a href="#"><img src={whatsapp} alt="icono whatsapp" /></a>
-            <a href="#"><img src={instagram} alt="icono instagram" /></a>
-            <a href="#"><img src={linkedin} alt="icono linkedin" /></a>
+            <a href="#"><img src={facebook.src} alt="icono facebook" /></a>
+            <a href="#"><img src={whatsapp.src} alt="icono whatsapp" /></a>
+            <a href="#"><img src={instagram.src} alt="icono instagram" /></a>
+            <a href="#"><img src={linkedin.src} alt="icono linkedin" /></a>
           </Box>
         </Box>
 

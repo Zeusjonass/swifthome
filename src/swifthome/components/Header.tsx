@@ -31,98 +31,91 @@ const CustomTooltip = styled(
   },
 }));
 
-const BtnHeaderContactUs = styled('a')(() => ({
-  backgroundColor: '#0A6FC0',
-  borderRadius: '0.125rem',
-  paddingBlock: '0.75rem',
-  paddingInline: '2.5rem',
-  border: 0,
-  outline: 0,
-  fontSize: '1rem',
-  color: '#fff',
-  textTransform: 'capitalize',
+const NavLink = styled('a')(({ theme }) => ({
+  color: '#E0E0E0',
+  fontWeight: 500,
   textDecoration: 'none',
+  transition: 'color 0.3s ease-out',
+  padding: '0.5rem 0',
+  position: 'relative',
+  '&:after': {
+    content: '""',
+    position: 'absolute',
+    width: '0',
+    height: '2px',
+    display: 'block',
+    marginTop: '5px',
+    right: '0',
+    background: '#B0E9FD',
+    transition: 'width 0.3s ease',
+  },
   '&:hover': {
-    backgroundColor: '#095CA0',
-    textDecoration: 'none',
-    color:'#fff'
+    color: '#FFFFFF',
+  },
+  '&:hover:after': {
+    width: '100%',
+    left: '0',
+    background: '#B0E9FD',
   },
 }));
 
-const NavLink = styled('a')(() => ({
-  marginTop: 0,
-  color: '#fff',
-  fontWeight: 400,
-  textDecoration: 'none',
-  transition: 'all 0.5s ease-out',
-  '&:hover': {
-    color: '#B0E9FD',
-  },
-}));
-
-const BtnCloseMenu = styled('button')<{ menu: boolean }>(({menu})=>({
+const MenuButton = styled('button')({
   background: 'none',
-	border: '0',
-	outline: '0',
-	fontSize: '2rem',
-	color:'#fff',
-	display: 'none',
-  borderRadius: '12px',
-  backgroundColor: '#1D3F5C',
-  width: '2.5rem',
-  padding: 0,
-  boxShadow:'0px 1px 5px rgba(255, 185, 69, 0.35)',
-  cursor:'pointer',
-
-  "@media (max-width: 768px)":{
-     display: 'block',
-     position: 'fixed',
-     top: '1.25rem',
-     right: '1.25rem',
-     transform: menu ? 'translate(0)': 'translateY(-100vw)',
-     transition: 'transform .4s ease-out',
-  }
-}))
-
-const BtnOpenMenu = styled('button')<{ menu: boolean }>(({menu})=>({
+  border: '0',
   outline: '0',
-  color:'#fff',
+  color: '#fff',
   cursor: 'pointer',
   display: 'none',
-  borderRadius: '12px',
+  borderRadius: '8px',
   padding: '8px',
-  border:'none',
-  background: '#1D3F5C',
-  boxSizing: 'border-box',
-  boxShadow:'0px 1px 5px rgba(255, 185, 69, 0.35)',
-  "@media (max-width: 768px)":{
-     display: 'flex',
-  }}))
+  transition: 'background-color 0.3s ease',
+  '&:hover': {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  "@media (max-width: 768px)": {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+});
 
-const NavList = styled('div')<{ menu: boolean }>(({menu})=>({
-  display:'flex',
-  columnGap:'1.75rem',
-  "@media (max-width: 768px)":{
-    position:'fixed',
-    top:'0',
-    right:'0',
+const BtnCloseMenu = styled(MenuButton)<{ menu: boolean }>(({ menu }) => ({
+  fontSize: '2rem',
+  position: 'fixed',
+  top: '1.25rem',
+  right: '1.25rem',
+  zIndex: 1100,
+  transform: menu ? 'translate(0)' : 'translateX(150%)',
+  transition: 'transform .4s ease-out',
+}));
+
+const BtnOpenMenu = styled(MenuButton)<{ menu: boolean }>({});
+
+const NavList = styled('div')<{ menu: boolean }>(({ menu }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '2.5rem',
+  "@media (max-width: 768px)": {
+    position: 'fixed',
+    top: '0',
+    right: '0',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-	  justifyContent: 'center',
-	  rowGap: '2.5rem',
-	  paddingBottom: '18rem',
-	  width:' min(65vw, 400px)',
-	  height: '100vh',
-	  backgroundColor:'#16273B',
-	  borderLeft: '1px solid rgba(136, 146, 176, .2)',
-	  transform: menu ?'translate(0)':'translate(100vw)',
-	  transition: 'transform .4s ease-out',
+    justifyContent: 'center',
+    gap: '2.5rem',
+    width: 'min(75vw, 400px)',
+    height: '100vh',
+    backgroundColor: 'rgba(22, 39, 59, 0.85)',
+    backdropFilter: 'blur(10px)',
+    borderLeft: '1px solid rgba(136, 146, 176, 0.2)',
+    transform: menu ? 'translate(0)' : 'translateX(100%)',
+    transition: 'transform .4s ease-out',
+    zIndex: 1000,
   }
-}))
+}));
 
 const Header = () => {
-  
   const { user, signOut } = useAuthenticator((context) => [context.user]);
   const navigate = useRouter();
 
@@ -139,95 +132,106 @@ const Header = () => {
     const threadAndFileId = localStorage.getItem('threadAndFileId');
     if (threadAndFileId) {
       await deleteFileMutation.mutateAsync(threadAndFileId);
-      console.log("file removed ", threadAndFileId)
     }
     signOut();
     navigate.push('/login');
   };
 
-  const handleQuoteClick = () => {
-    navigate.push('/login#plans');
-  };
-
-  const [menu, setMenu] = useState<boolean>(false)
+  const [menu, setMenu] = useState<boolean>(false);
   const [openTooltip, setOpenTooltip] = useState<boolean>(false);
 
+  const NavButton = styled(Button)({
+    color: '#fff',
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    textTransform: 'none',
+    fontSize: '1rem',
+    fontWeight: 500,
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+      borderColor: '#B0E9FD',
+    },
+  });
+
   return (
-    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', bgcolor: '#16273B', position: 'relative', zIndex: '22' }}>
+    <Box
+      component="header"
+      sx={{
+        position: 'sticky',
+        top: 0,
+        zIndex: 50,
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        bgcolor: 'rgba(22, 39, 59, 0.7)',
+        backdropFilter: 'blur(8px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+      }}
+    >
       <Box sx={{
-        width: { xs: '90%', md: '100%' },
-        paddingInline: { xs: '0', md: '6rem' },
+        width: '100%',
+        maxWidth: '1440px',
+        padding: { xs: '1rem 1.5rem', md: '1rem 4rem' },
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
       }}>
 
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Link href="/">
-            <img src={LogoDeux.src} style={{ width: '8rem' }} alt="logo" />
-          </Link>
-        </Box>
-       
-        <Box sx={{
-            paddingBlock:{xs:'2rem',md:'1.75rem'},
-            paddingInline:{xs:'0', md:'3.5rem'}, 
-            position:'relative'}}>
+        <Link href="/">
+          <img src={LogoDeux.src} style={{ width: '7rem', display: 'block' }} alt="logo" />
+        </Link>
 
-          <NavList menu={menu}>
-            { !user && (<NavLink href="#plans">Precio</NavLink> )}
+        <NavList menu={menu}>
+          <BtnCloseMenu menu={menu} onClick={() => setMenu(false)}>
+            <CloseIcon />
+          </BtnCloseMenu>
+          
+          { !user && (<NavLink href="#plans" onClick={() => setMenu(false)}>Precio</NavLink>)}
            
-          <ClickAwayListener onClickAway={()=>setOpenTooltip(false)}>
-            <CustomTooltip 
-              title={<TooltipContent/>} 
-              arrow
-              disableFocusListener
-              onClose={()=>setOpenTooltip(false)}
-              open={openTooltip}
-              disableHoverListener
-              disableTouchListener>
-              <NavLink href="#" onClick={(e) => {
-                e.preventDefault();
-                setOpenTooltip((prev) => !prev); 
-            }}>¿Cómo funciona?
-              </NavLink>
-            </CustomTooltip>
+          <ClickAwayListener onClickAway={() => setOpenTooltip(false)}>
+            <div>
+              <CustomTooltip 
+                title={<TooltipContent/>} 
+                arrow
+                disableFocusListener
+                onClose={() => setOpenTooltip(false)}
+                open={openTooltip}
+                disableHoverListener
+                disableTouchListener
+              >
+                <NavLink href="#" onClick={(e) => {
+                  e.preventDefault();
+                  setOpenTooltip((prev) => !prev); 
+                }}>
+                  ¿Cómo funciona?
+                </NavLink>
+              </CustomTooltip>
+            </div>
           </ClickAwayListener>
-          </NavList>
-        </Box>
+
+          {user ? (
+            <NavButton
+              variant="outlined"
+              startIcon={<LogoutIcon />}
+              onClick={handleSignOut}
+            >
+              Cerrar Sesión
+            </NavButton>
+          ) : (
+            <NavButton
+              variant="outlined"
+              onClick={() => {
+                navigate.push('#contact');
+                setMenu(false);
+              }}
+            >
+              Contacto
+            </NavButton>
+          )}
+        </NavList>
 
         <BtnOpenMenu menu={menu} onClick={() => setMenu(true)}>
           <MenuIcon sx={{ fontSize: '2rem' }} />
         </BtnOpenMenu>
-
-        <BtnCloseMenu menu={menu} onClick={() => setMenu(false)}>
-          <CloseIcon />
-        </BtnCloseMenu>
-
-        <Box
-          sx={{
-            "@media (max-width: 768px)": {
-              display: "flex",
-              position: "fixed",
-              bottom: "16rem",
-              right: 0,
-              width: "min(65vw, 400px)",
-              justifyContent: "center",
-              fontSize: "1.25rem",
-              transform: menu ? "translate(0)" : "translate(100vw)",
-              transition: "transform 0.4s ease-out",
-              alignItems: "center",
-            }}}>
-          
-          {/* Si el usuario ha iniciado sesion se renderiza el boton de cerrar sesion en caso contrario
-            se renderiza el boton de contacto*/}
-          {user ? (
-            <Button sx={{ backgroundColor: "#0A6FC0", color: "#d9e0e7",
-                          '&:hover': { backgroundColor: '#095CA0' }
-          }}        startIcon={<LogoutIcon />} onClick={handleSignOut}/>) :
-            
-            <BtnHeaderContactUs href="#contact"> Contacto </BtnHeaderContactUs>
-          }
-        </Box>
       </Box>
     </Box>
   );
