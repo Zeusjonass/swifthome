@@ -51,7 +51,9 @@ const MessageList = ({ messages, loading }: MessageListProps) => {
             }}
           >
             {msg.properties.map((property: any, propIndex: number) => (
-              <Grid item xs={12} sm={12} md={6} lg={6} xl={4} key={propIndex}>
+              <Grid key={propIndex}
+                size={{xs:12, sm:12, md:6, lg:6, xl:4}}
+              >
                 <PropertyCard
                   title={property.title}
                   price={property.price}

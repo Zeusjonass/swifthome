@@ -84,8 +84,9 @@ const PropertyCard = React.memo(({
         
         <Button 
           variant="contained" 
-          href={link} 
+          href={link || "#"} 
           target="_blank" 
+          disabled={!link}
           sx={{ 
             marginTop: 2, 
             color: "#d9e0e7", 

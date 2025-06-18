@@ -190,11 +190,6 @@ const LoginPage = () => {
     
             <Authenticator initialState="signIn" hideSignUp>
             {({ signOut, user }) => {
-                useEffect(() => {
-                if (user) {
-                    navigate.push('/chat');
-                }
-                }, [user, navigate]);
 
                 return user ? (
                 <Box sx={{color: 'white'}}>Redirigiendo...</Box>
