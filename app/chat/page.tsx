@@ -9,33 +9,24 @@ import { useRouter } from 'next/navigation';
 import ChatPage from '@/src/swifthome/pages/ChatPage';
 
 const HomePage = () => {
-  const { user } = useAuthenticator((context) => [context.user]);
+  const { user, authStatus } = useAuthenticator((context) => [context.user, context.authStatus]);
   const navigate = useRouter();
 
   const [initializeAssistantResponse, setInitializeAssistantResponse] = useState<InitializeAssistantResponse | undefined>(undefined);
 
-  const { data: questions, isLoading } = useQuestionsByUserIdQuery(user?.userId);
+  const { data: questions, isLoading } = useQuestionsByUserIdQuery(
+    user?.userId ?? "",
+  );
 
   useEffect(() => {
-    if (user === undefined) {
-      navigate.push('/login');
+    if (user === undefined || authStatus === 'unauthenticated') {
+      navigate.push('/');
     }
-  }, [user, navigate]);
+  }, [user, navigate, authStatus]);
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "/initParticles.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  if (isLoading) {
+  if (authStatus === 'configuring' || authStatus === 'unauthenticated' || !user) {
     return (
-      <Box id="particles-js" display="flex" justifyContent="center" alignItems="center" height="100vh">
+      <Box id="particles-js" display="flex" justifyContent="center" alignItems="center" height="100vh" zIndex={999}>
         <CircularProgress />
       </Box>
     );

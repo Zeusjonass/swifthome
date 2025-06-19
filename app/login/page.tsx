@@ -1,50 +1,50 @@
 "use client"
-import { useState, useEffect } from 'react';
-import { Box, Button, Grid, Typography } from "@mui/material";
-import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-import { styled } from '@mui/material/styles';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import { TypeAnimation } from 'react-type-animation';
+// import { useState, useEffect } from 'react';
+// import { Box, Button, Grid, Typography } from "@mui/material";
+// import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
+// import '@aws-amplify/ui-react/styles.css';
+// import { styled } from '@mui/material/styles';
+// import Dialog from '@mui/material/Dialog';
+// import DialogContent from '@mui/material/DialogContent';
+// import { TypeAnimation } from 'react-type-animation';
 
-import { useRouter } from 'next/navigation';
-import LottieAnimation from '@/src/swifthome/components/LottieAnimation';
+// import { useRouter } from 'next/navigation';
+// import LottieAnimation from '@/src/swifthome/components/LottieAnimation';
 
-import littleRobotAnimation from '@/src/swifthome/media/little-robot.json';
-import PlansBanner from '@/src/swifthome/components/plans/PlansBanner';
+// import littleRobotAnimation from '@/src/swifthome/media/little-robot.json';
+// import PlansBanner from '@/src/swifthome/components/plans/PlansBanner';
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
-  },
-}));
+// const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+//   '& .MuiDialogContent-root': {
+//     padding: theme.spacing(2),
+//   },
+//   '& .MuiDialogActions-root': {
+//     padding: theme.spacing(1),
+//   },
+// }));
 
 const LoginPage = () => {
-  const { user } = useAuthenticator((context) => [context.user]);
-  const navigate = useRouter();
+  // const { user } = useAuthenticator((context) => [context.user]);
+  // const navigate = useRouter();
 
-  useEffect(() => {
-    if (user?.userId !== undefined) {
-      navigate.push('/chat');
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (user?.userId !== undefined) {
+  //     navigate.push('/chat');
+  //   }
+  // }, [user, navigate]);
 
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
   return (
     <>
-      <Box
+      {/* <Box
         sx={{
           minHeight: '100vh',
           width: '100%',
@@ -221,7 +221,7 @@ const LoginPage = () => {
           bottom: "5%",
           zIndex: 99,
         }}
-      />
+      /> */}
     </>
   );
 };

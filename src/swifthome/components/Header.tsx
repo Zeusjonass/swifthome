@@ -14,6 +14,7 @@ import TooltipContent from './header/TooltipContent';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { Shield } from '@mui/icons-material';
 
 const CustomTooltip = styled(
   React.forwardRef<HTMLDivElement, TooltipProps>(({ className, ...props }, ref) => (
@@ -134,7 +135,7 @@ const Header = () => {
       await deleteFileMutation.mutateAsync(threadAndFileId);
     }
     signOut();
-    navigate.push('/login');
+    navigate.push('/');
   };
 
   const [menu, setMenu] = useState<boolean>(false);
@@ -209,13 +210,23 @@ const Header = () => {
           </ClickAwayListener>
 
           {user ? (
-            <NavButton
-              variant="outlined"
-              startIcon={<LogoutIcon />}
-              onClick={handleSignOut}
-            >
-              Cerrar Sesión
-            </NavButton>
+            <>
+              <NavButton
+                variant="outlined"
+                startIcon={<LogoutIcon />}
+                onClick={handleSignOut}
+              >
+                Cerrar Sesión
+              </NavButton>
+
+              <NavButton
+                variant="outlined"
+                startIcon={<Shield  sx={{mr: 1}}/>}
+                onClick={() => navigate.push('/admin')}
+              >
+                Ir al Panel de Control
+              </NavButton>
+            </>
           ) : (
             <NavButton
               variant="outlined"
