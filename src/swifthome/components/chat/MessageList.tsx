@@ -31,9 +31,9 @@ const MessageList = ({ messages, loading }: MessageListProps) => {
       ref={scrollableContainerRef}
       sx={{
         overflowY: 'auto',
-        height: '400px',
+        height: '100%',
+        padding: 2,
         scrollBehavior: 'smooth',
-        position: 'relative',
       }}
     >
       {messages.map((msg, index) => (
@@ -74,6 +74,7 @@ const MessageList = ({ messages, loading }: MessageListProps) => {
             className={`d-flex ${
               msg.sender === 'self' ? 'justify-content-end' : 'justify-content-start'
             } mb-5`}
+            sx={{display: "flex", justifyContent: `${msg.sender === 'self' ? 'flex-end' : 'flex-start'}`, mb: 5}} 
           >
             {msg.sender === 'other' && (
               <Box>

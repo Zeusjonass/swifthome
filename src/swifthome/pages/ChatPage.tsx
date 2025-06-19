@@ -67,19 +67,31 @@ const ChatPage = ({ sessionId, clientId, userId }: ChatPageProps) => {
   };
 
   return (
-    <Grid container justifyContent="center" maxHeight="80vh" className='chat-container'>
-      <Grid size={{xs:11, sm:10, md:9, lg:8}}>
-        <Box className="card" sx={{ width: "100%", height: "100%" }}>
+  <Grid container justifyContent="center" sx={{ height: '100%', minHeight: '80vh', py: 4 }} className='chat-container'>
+    <Grid size={{xs:11, sm:10, md:9, lg:8}}>
+      <Box
+        sx={{
+          height: '90vh',
+          display: 'flex',
+          flexDirection: 'column',
+          borderRadius: 3,
+          boxShadow: 3,
+          overflow: 'hidden',
+          backgroundColor: 'rgba(255, 255, 255, 0.3)',
+        }}
+      >
+        <Box sx={{ flex: 1, overflow: 'hidden' }}>
           <MessageList messages={messages} loading={loading} />
-          <MessageInput
-            newMessage={newMessage}
-            setNewMessage={setNewMessage}
-            handleSendMessage={handleSendMessage}
-            handleKeyPress={handleKeyPress}
-          />
         </Box>
-      </Grid>
+        <MessageInput
+          newMessage={newMessage}
+          setNewMessage={setNewMessage}
+          handleSendMessage={handleSendMessage}
+          handleKeyPress={handleKeyPress}
+        />
+      </Box>
     </Grid>
+  </Grid>
   );
 };
 

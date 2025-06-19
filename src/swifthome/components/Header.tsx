@@ -79,13 +79,13 @@ const MenuButton = styled('button')({
   }
 });
 
-const BtnCloseMenu = styled(MenuButton)<{ menu: boolean }>(({ menu }) => ({
+const BtnCloseMenu = styled(MenuButton)<{ $menu: boolean }>(({ $menu }) => ({
   fontSize: '2rem',
   position: 'fixed',
   top: '1.25rem',
   right: '1.25rem',
   zIndex: 1100,
-  transform: menu ? 'translate(0)' : 'translateX(150%)',
+  transform: $menu ? 'translate(0)' : 'translateX(150%)',
   transition: 'transform .4s ease-out',
 }));
 
@@ -181,7 +181,7 @@ const Header = () => {
         </Link>
 
         <NavList menu={menu}>
-          <BtnCloseMenu menu={menu} onClick={() => setMenu(false)}>
+          <BtnCloseMenu $menu={menu} onClick={() => setMenu(false)}>
             <CloseIcon />
           </BtnCloseMenu>
           
