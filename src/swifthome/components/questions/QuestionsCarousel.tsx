@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
   Box,
   Button,
@@ -122,7 +122,8 @@ const QuestionsCarousel = ({ questions, setInitializeAssistantResponse }: Questi
 
   return (
     <>
-    <Grid item xs={12} md={4} lg={4}
+    <Grid
+      size={{xs:12, md:4, lg:4}}
       sx={{
         backgroundColor:"white",
         borderRadius:{xs:"5px 5px 0 0", md:"5px 0 0 5px"},
@@ -134,7 +135,7 @@ const QuestionsCarousel = ({ questions, setInitializeAssistantResponse }: Questi
     <Box sx={{
       width:'100%', 
       height:'100%', 
-      backgroundImage: `url(${backgroundImage})`, 
+      backgroundImage: `url(${backgroundImage.src})`, 
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
       backgroundPosition:"center",
@@ -199,7 +200,7 @@ const QuestionsCarousel = ({ questions, setInitializeAssistantResponse }: Questi
           </Box>
         </>
     ) : (
-    <Grid item xs={12} md={8} lg={6}
+    <Grid size={{xs:12, md:8, lg:6}}
       sx={{
         backgroundColor:"white",
         borderRadius:{xs:"0 0 5px 5px", md:"0 5px 5px 0"},

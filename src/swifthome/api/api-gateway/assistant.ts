@@ -21,7 +21,7 @@ export type PostAssistantNewMessageRequest = {
 
 export type PostAssistantNewMessageResponse = {
   initialText: string;
-  properties: any[];
+  properties: unknown[];
   finalText: string;
 }
 

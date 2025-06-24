@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, IconButton, useTheme, useMediaQuery } from "@mui/material";
 import { ArrowCircleRightOutlined, DashboardOutlined, EditOutlined, MapsHomeWorkOutlined, QuestionAnswerOutlined, SettingsOutlined, Menu as MenuIcon, ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 interface SideBarProps {
   drawerWidth: number;
@@ -15,6 +16,7 @@ export const SideBar = ({ drawerWidth, headerHeight }: SideBarProps) => {
   const location = usePathname()
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [isCollapsed, setIsCollapsed] = useState(isSmallScreen);
+  const navigate = useRouter();
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
@@ -25,6 +27,10 @@ export const SideBar = ({ drawerWidth, headerHeight }: SideBarProps) => {
       setIsCollapsed(true);
     }
   }, [isSmallScreen]);
+
+  const handleRedirectChat = async () => {
+    navigate.push('/chat');
+  };
 
   const dataItems = [
     { icon: <DashboardOutlined />, text: "Dashboard", path: "/admin" },
@@ -171,6 +177,7 @@ export const SideBar = ({ drawerWidth, headerHeight }: SideBarProps) => {
         {/* Botón de Logout */}
         <Box sx={{ width: "80%" }}>
           <ListItem
+            onClick={handleRedirectChat}
             sx={{
               width: "100%",
               border: "1px solid #E0E0E0",
@@ -179,13 +186,14 @@ export const SideBar = ({ drawerWidth, headerHeight }: SideBarProps) => {
               paddingX: 2,
               display: "flex",
               alignItems: "center",
+              cursor: "pointer",
               justifyContent: isCollapsed ? "center" : "space-between",
               "&:hover": {
                 backgroundColor: "#E0E0E0",
               },
             }}
           >
-            {!isCollapsed && <ListItemText primary="Cerrar sesión" />}
+            {!isCollapsed && <ListItemText primary="Volver al Chat" />}
             <ListItemIcon
               sx={{
                 minWidth: "40px",

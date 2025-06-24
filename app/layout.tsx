@@ -3,14 +3,14 @@ import "./globals.css";
 import { Amplify } from "aws-amplify";
 import awsExports from '@/src/swifthome/aws-exports.js';
 import { Authenticator } from "@aws-amplify/ui-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { configureAmplify } from "@/src/lib/amplifyClient";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Header from "@/src/swifthome/components/Header";
 import Footer from "@/src/swifthome/components/Footer";
 import { usePathname } from "next/navigation";
 
-Amplify.configure(awsExports);
+Amplify.configure({ ...awsExports });
 
 export default function RootLayout({
   children,
@@ -22,7 +22,7 @@ export default function RootLayout({
   }, []);
   const location = usePathname();
   const isViewAdmin = /^\/admin(\/.*)?$/.test(location);
-  const queryClient = new QueryClient();
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <html lang="es">

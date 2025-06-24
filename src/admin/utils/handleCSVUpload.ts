@@ -278,7 +278,7 @@ const handleCSVUpload = async (file: File) => {
   const data = await parseCSV(file);
 
   const allErrors: ValidationError[] = [];
-  const validRows: any[] = [];
+  const validRows: unknown[] = [];
 
   data.forEach((row, index) => {
     const errors = validateRow(row, index);

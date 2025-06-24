@@ -1,5 +1,6 @@
 import { AppBar, Toolbar, Box, IconButton, Avatar, Typography } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import Image from "next/image";
 
 export const Header = ({headerHeight}: {headerHeight: number}) => {
   //TODO: Cambiar a Link y path
@@ -8,7 +9,7 @@ export const Header = ({headerHeight}: {headerHeight: number}) => {
       <Toolbar sx={{ backgroundColor: 'white', height: '100%' }}>
         <Box sx={{ flexGrow: 1 }}>
           <a href="#" style={{display: 'inline-block'}}>
-            <img src="/fostwjj399sm1ozl1e9-1-2.png.webp" alt="Logo" style={{width: '200px'}}/>
+            <Image src="/fostwjj399sm1ozl1e9-1-2.png.webp" alt="Logo" style={{width: '200px'}}/>
           </a>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>

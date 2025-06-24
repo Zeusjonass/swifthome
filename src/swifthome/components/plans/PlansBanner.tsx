@@ -1,5 +1,5 @@
 import React, { useState, SyntheticEvent } from 'react';
-import { Box, Tabs, Tab, Grid, Typography, TextField, Button } from "@mui/material";
+import { Box, Tabs, Tab, Grid, Typography, TextField } from "@mui/material";
 import PlanCard from './PlanCard';
 import CheckoutButton from './CheckoutButton';
 import Chip from '@mui/material/Chip';
@@ -83,7 +83,7 @@ const PlansBanner: React.FC = () => {
         </Tabs>
 
         <Grid container spacing={4} justifyContent="center" sx={{mt:'0'}}>
-          <Grid item>
+          <Grid>
             <PlanCard
               clase={`plan-card ${selectedPlan.startsWith("Individual") ? "dark" : ""}`}
               name="Individual"
@@ -98,7 +98,7 @@ const PlansBanner: React.FC = () => {
             </PlanCard>
           </Grid>
 
-          <Grid item>
+          <Grid>
             <PlanCard
               clase={`plan-card ${selectedPlan.startsWith("Estándar") ? "dark" : ""}`}
               name="Estándar"
@@ -113,7 +113,7 @@ const PlansBanner: React.FC = () => {
             </PlanCard>
           </Grid>
           
-          <Grid item>
+          <Grid>
             <PlanCard
               clase={`plan-card ${selectedPlan.startsWith("Profesional") ? "dark" : ""}`}
               name="Profesional"
@@ -128,7 +128,7 @@ const PlansBanner: React.FC = () => {
             </PlanCard>
           </Grid>
 
-          <Grid item>
+          <Grid>
             <PlanCard
               clase={`plan-card ${selectedPlan.startsWith("Corporativo") ? "dark" : ""}`}
               name="Corporativo"

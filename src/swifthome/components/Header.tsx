@@ -14,11 +14,13 @@ import TooltipContent from './header/TooltipContent';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { Shield } from '@mui/icons-material';
+import Image from 'next/image';
 
 const CustomTooltip = styled(
-  React.forwardRef<HTMLDivElement, TooltipProps>(({ className, ...props }, ref) => (
-    <Tooltip {...props} classes={{ popper: className }} ref={ref} />
-  ))
+  React.forwardRef<HTMLDivElement, TooltipProps>(function CustomTooltip({ className, ...props }, ref) {
+    return <Tooltip {...props} classes={{ popper: className }} ref={ref} />;
+  })
 )(() => ({
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: '#1F272D',
@@ -31,7 +33,7 @@ const CustomTooltip = styled(
   },
 }));
 
-const NavLink = styled('a')(({ theme }) => ({
+const NavLink = styled('a')(() => ({
   color: '#E0E0E0',
   fontWeight: 500,
   textDecoration: 'none',
@@ -79,17 +81,21 @@ const MenuButton = styled('button')({
   }
 });
 
-const BtnCloseMenu = styled(MenuButton)<{ menu: boolean }>(({ menu }) => ({
+const BtnCloseMenu = styled(MenuButton, {
+  shouldForwardProp: (prop) => prop !== '$menu'
+})<{ $menu: boolean }>(({ $menu }) => ({
   fontSize: '2rem',
   position: 'fixed',
   top: '1.25rem',
   right: '1.25rem',
   zIndex: 1100,
-  transform: menu ? 'translate(0)' : 'translateX(150%)',
+  transform: $menu ? 'translate(0)' : 'translateX(150%)',
   transition: 'transform .4s ease-out',
 }));
 
-const BtnOpenMenu = styled(MenuButton)<{ menu: boolean }>({});
+const BtnOpenMenu = styled(MenuButton, {
+  shouldForwardProp: (prop) => prop !== '$menu'
+})<{ $menu: boolean }>({});
 
 const NavList = styled('div')<{ menu: boolean }>(({ menu }) => ({
   display: 'flex',
@@ -134,7 +140,7 @@ const Header = () => {
       await deleteFileMutation.mutateAsync(threadAndFileId);
     }
     signOut();
-    navigate.push('/login');
+    navigate.push('/');
   };
 
   const [menu, setMenu] = useState<boolean>(false);
@@ -162,7 +168,7 @@ const Header = () => {
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
-        bgcolor: 'rgba(22, 39, 59, 0.7)',
+        bgcolor: 'rgba(22, 39, 59, 0.9)',
         backdropFilter: 'blur(8px)',
         borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
       }}
@@ -177,11 +183,11 @@ const Header = () => {
       }}>
 
         <Link href="/">
-          <img src={LogoDeux.src} style={{ width: '7rem', display: 'block' }} alt="logo" />
+          <Image src={LogoDeux.src} style={{ width: '7rem', display: 'block' }} alt="logo" />
         </Link>
 
         <NavList menu={menu}>
-          <BtnCloseMenu menu={menu} onClick={() => setMenu(false)}>
+          <BtnCloseMenu $menu={menu} onClick={() => setMenu(false)}>
             <CloseIcon />
           </BtnCloseMenu>
           
@@ -209,13 +215,23 @@ const Header = () => {
           </ClickAwayListener>
 
           {user ? (
-            <NavButton
-              variant="outlined"
-              startIcon={<LogoutIcon />}
-              onClick={handleSignOut}
-            >
-              Cerrar Sesión
-            </NavButton>
+            <>
+              <NavButton
+                variant="outlined"
+                startIcon={<LogoutIcon />}
+                onClick={handleSignOut}
+              >
+                Cerrar Sesión
+              </NavButton>
+
+              <NavButton
+                variant="outlined"
+                startIcon={<Shield  sx={{mr: 1}}/>}
+                onClick={() => navigate.push('/admin')}
+              >
+                Ir al Panel de Control
+              </NavButton>
+            </>
           ) : (
             <NavButton
               variant="outlined"
@@ -229,7 +245,7 @@ const Header = () => {
           )}
         </NavList>
 
-        <BtnOpenMenu menu={menu} onClick={() => setMenu(true)}>
+        <BtnOpenMenu $menu={menu} onClick={() => setMenu(true)}>
           <MenuIcon sx={{ fontSize: '2rem' }} />
         </BtnOpenMenu>
       </Box>

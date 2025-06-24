@@ -1,6 +1,10 @@
 "use client";
 
-import { ThemeProvider, CssBaseline, Box } from "@mui/material";
+import { useAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { ThemeProvider, CssBaseline, Box, CircularProgress } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import { Header, SideBar, DashboardDataProvider } from "@/src/admin/components";
 import { mainTheme } from "@/src/admin/theme";
@@ -10,13 +14,28 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
-import { useState } from "react";
 
 const drawerWidth = 294;
 const headerHeight = 96;
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  const { authStatus } = useAuthenticator(context => [context.authStatus]);
+  const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
+
+  useEffect(() => {
+    if (authStatus === 'unauthenticated') {
+      router.push('/');
+    }
+  }, [authStatus, router]);
+
+  if (authStatus === 'configuring' || authStatus === 'unauthenticated') {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <ThemeProvider theme={mainTheme}>

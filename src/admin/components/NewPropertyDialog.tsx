@@ -66,7 +66,7 @@ export const NewPropertyDialog = ({
       enqueueSnackbar(data.message, { variant: "success" });
       onClose();
     },
-    onError: (error: any) => {
+    onError: (error) => {
       setIsSubmitting(false);
       enqueueSnackbar(error.message || "Error al guardar la propiedad", {
         variant: "error",
@@ -98,7 +98,7 @@ export const NewPropertyDialog = ({
   const onError = (errors: FieldErrors) => {
     Object.values(errors).forEach((error) => {
       if (error?.message) {
-        enqueueSnackbar(error.message as String, { variant: "error" });
+        enqueueSnackbar(error.message as string, { variant: "error" });
       }
     });
   };

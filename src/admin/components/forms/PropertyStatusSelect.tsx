@@ -15,8 +15,8 @@ export const PropertyStatusSelect = ({propertyId, status}: {propertyId: string |
       enqueueSnackbar(data.message, { variant: "success" });
       updateStatus(data.updatedAttributes);
     },
-    onError: (error: any) => {
-      enqueueSnackbar(error || "Error al guardar la propiedad", { variant: "error" });
+    onError: (error) => {
+      enqueueSnackbar(error.message || "Error al guardar la propiedad", { variant: "error" });
     },
   });
 

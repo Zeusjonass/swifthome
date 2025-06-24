@@ -18,11 +18,7 @@ axiosInstance.interceptors.request.use(
       const token = session?.tokens?.accessToken?.toString() || "";
 
       if (token) {
-        //@ts-ignore
-        config.headers = {
-          ...config.headers,
-          Authorization: `Bearer ${token}`,
-        };
+        config.headers.Authorization = `Bearer ${token}`;
       }
     } catch (error) {
       console.error("Error retrieving Cognito token via fetchAuthSession", error);

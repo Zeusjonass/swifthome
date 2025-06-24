@@ -2,6 +2,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { Box, DialogContent, FormControl, FormLabel, InputAdornment, MenuItem, Select, Skeleton } from "@mui/material";
 import { StyledTextField } from "../ui";
 import { createNumberValidationRules, preventInvalidNumberCharacters, validateURL } from "../../utils";
+import Image from "next/image";
 
 export const PropertyFinancialInfoEditForm = () => {
   const { register, watch, control, formState: {errors} } = useFormContext();
@@ -33,7 +34,7 @@ export const PropertyFinancialInfoEditForm = () => {
         }}
       >
         {image ? (
-          <img
+          <Image
             src={image}
             alt="Imagen de la Propiedad"
             title="Imagen de la Propiedad"

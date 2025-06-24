@@ -1,8 +1,9 @@
 import { Player } from '@lottiefiles/react-lottie-player';
+import { CSSProperties } from 'react';
 
 interface LottieAnimationProps {
-    animationData: any;
-    style?: any;
+    animationData: string | object;
+    style?: CSSProperties | undefined;
     className?:string; 
 }
 

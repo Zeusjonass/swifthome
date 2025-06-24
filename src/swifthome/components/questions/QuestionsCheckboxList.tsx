@@ -79,10 +79,10 @@ const QuestionsCheckboxList: FC<QuestionsCheckboxListProps> = ({ setSelectedQues
             onClick={handleToggle(question.questionId)}
           >
             <Grid container alignItems="center">
-              <Grid item xs>
+              <Grid>
                 <ListItemText id={labelId} primary={question.displayText} />
               </Grid>
-              <Grid item>
+              <Grid>
                 <ListItemIcon>
                   <Checkbox
                     edge="end"
