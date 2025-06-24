@@ -1,16 +1,15 @@
 "use client"
 import { useState, useEffect } from 'react';
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import { TypeAnimation } from 'react-type-animation';
-
+import backgroundImage from '@/src/swifthome/images/merida.jpg';
 import { useRouter } from 'next/navigation';
 import LottieAnimation from '@/src/swifthome/components/LottieAnimation';
-
 import littleRobotAnimation from '@/src/swifthome/media/little-robot.json';
 import PlansBanner from '@/src/swifthome/components/plans/PlansBanner';
 
@@ -42,6 +41,14 @@ const LoginPage = () => {
     setOpen(false);
   };
 
+  function RedirectToChat() {
+    const router = useRouter();
+    useEffect(() => {
+      router.push('/chat');
+    }, [router]);
+    return <Box sx={{ color: 'white' }}>Redirigiendo...</Box>;
+  }
+
   return (
     <>
       <Box
@@ -61,7 +68,6 @@ const LoginPage = () => {
           p: 3,
         }}
       >
-
         <Box
           sx={{
             position: 'absolute',
@@ -73,8 +79,6 @@ const LoginPage = () => {
             zIndex: 1,
           }}
         />
-
-
         <Box sx={{ zIndex: 2, position: 'relative' }}>
           <Typography
             component="small"
@@ -178,22 +182,40 @@ const LoginPage = () => {
           </Button>
         </Box>
       </Box>
-
       <BootstrapDialog
         fullWidth
-        maxWidth="sm"
+        maxWidth="xl"
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
+        sx={{
+          display:"flex",
+          justifyContent:"center",
+          alignItems:"center",
+          backgroundColor:"transparent",
+        }}
       >
-        <DialogContent>
-    
-            <Authenticator initialState="signIn" hideSignUp>
-            {({ signOut, user }) => {
-
-                return user ? (
-                <Box sx={{color: 'white'}}>Redirigiendo...</Box>
-                ) : <></>;
+        <DialogContent style={{
+          width:'fit-content',
+          backgroundImage:`url(${backgroundImage.src})`,
+          backgroundSize:'cover',
+          backgroundPosition:'center center',
+        }}>
+          <div className='overlay' style={{
+            backgroundColor:'black',
+            opacity:'.7',
+            width:'100%',
+            height:'100%',
+            position:'absolute',
+            top:'0',
+            left:'0',
+          }}></div>
+            <Authenticator initialState="signIn" hideSignUp >
+            {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
+            {({ signOut: _, user }) => {
+              return user ? (
+                <RedirectToChat />
+              ) : <Box>Por favor, inicia sesión.</Box>;
             }}
             </Authenticator>
         </DialogContent>

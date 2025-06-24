@@ -6,12 +6,31 @@ import Typography from '@mui/material/Typography';
 import littleRobotAnimation from '../../media/little-robot.json'
 import { Player } from '@lottiefiles/react-lottie-player';
 
-interface MessageListProps {
-  messages: any[];
-  loading: boolean;
+interface Property {
+  title: string;
+  price: number;
+  tags: string[];
+  bathrooms: number;
+  bedrooms: number;
+  image: string;
+  link: string;
+  reason: string;
+  rate: number;
 }
 
-const MessageList = ({ messages, loading }: MessageListProps) => {
+interface TextMessage {
+  text: string;
+  sender: 'self' | 'other';
+  time: string;
+}
+
+interface PropertyListMessage {
+  properties: Property[];
+}
+
+type Message = TextMessage | PropertyListMessage;
+
+const MessageList = ({ messages, loading }: { messages: Message[]; loading: boolean }) => {
   const scrollableContainerRef = useRef<HTMLDivElement | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -37,7 +56,7 @@ const MessageList = ({ messages, loading }: MessageListProps) => {
       }}
     >
       {messages.map((msg, index) => (
-        Array.isArray(msg.properties) ? (
+        'properties' in msg ? (
           <Grid
             container
             spacing={2}
@@ -50,7 +69,7 @@ const MessageList = ({ messages, loading }: MessageListProps) => {
               marginBottom: '10px',
             }}
           >
-            {msg.properties.map((property: any, propIndex: number) => (
+            {msg.properties.map((property: Property, propIndex: number) => (
               <Grid key={propIndex}
                 size={{xs:12, sm:12, md:6, lg:6, xl:4}}
               >
@@ -96,8 +115,10 @@ const MessageList = ({ messages, loading }: MessageListProps) => {
             <Box className={`msg_cotainer${msg.sender === 'self' ? '_send' : ''}`}>
               <ReactMarkdown
                 components={{
-                  img: ({ node, ...props }) => (
-                    <img {...props} style={{ maxWidth: '160px', maxHeight: '160px' }} />
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                  img: ({ node: _, ...props }) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img {...props} style={{ maxWidth: '160px', maxHeight: '160px' }} alt={props.alt}/>
                   ),
                 }}
               >

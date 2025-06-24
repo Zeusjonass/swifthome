@@ -5,6 +5,7 @@ import { Property } from "../schemas";
 import { EditPropertyDialog } from "./EditPropertyDialog";
 import { PropertyStatusSelect } from "./forms";
 import { BaseTable } from "./ui";
+import Image from "next/image";
 
 interface TablePropertiesProps {
   headCells: { id: string, label: string }[];
@@ -49,7 +50,7 @@ export const TableProperties = ({headCells, properties}: TablePropertiesProps) =
                   }}
                 >
                   {property.image ? (
-                    <img
+                    <Image
                       src={property.image}
                       alt={property.title}
                       style={{ borderRadius: "16px", width: '100%', height: '100%' }}

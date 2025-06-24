@@ -104,4 +104,6 @@ const PropertyCard = React.memo(({
   );
 });
 
+PropertyCard.displayName = 'PropertyCard';
+
 export default PropertyCard;

@@ -39,10 +39,11 @@ export const EditPropertyDialog = ({ open, onClose, property }: EditPropertyDial
       tags: [] as string[],
     },
   });
+  const { reset } = methods;
 
   useEffect(() => {
     if (property) {
-      methods.reset({
+      reset({
         address: property.address || "",
         title: property.title || "",
         location: property.location || "",
@@ -63,7 +64,7 @@ export const EditPropertyDialog = ({ open, onClose, property }: EditPropertyDial
         tags: Array.isArray(property.tags) ? property.tags : [],
       });
     }
-  }, [property, methods.reset]);
+  }, [property, reset]);
 
   const { mutate, isPending } = useMutation({
     mutationFn: editProperty,
@@ -72,16 +73,17 @@ export const EditPropertyDialog = ({ open, onClose, property }: EditPropertyDial
       queryClient.invalidateQueries({ queryKey: ["dashboardData"] });
       onClose();
     },
-    onError: (error: any) => {
-      enqueueSnackbar(error || "Error al guardar la propiedad", { variant: "error" });
+    onError: (error) => {
+      enqueueSnackbar(error.message || "Error al guardar la propiedad", { variant: "error" });
     },
   });
 
   const onlyDirtyFields = (propertyEdited: PropertyFormData) => {
-    const propertyToSend: any = {};
+    const propertyToSend: Record<string, unknown> = {};
     for (const field in propertyEdited) {
-      if (methods.formState.dirtyFields.hasOwnProperty(field)) {
-        propertyToSend[field] = (propertyEdited as any)[field];
+      const key = field as keyof PropertyFormData;
+      if (methods.formState.dirtyFields[key]) {
+        propertyToSend[key] = propertyEdited[key];
       }
     }
     propertyToSend["propertyId"] = property?.propertyId;
@@ -108,7 +110,7 @@ export const EditPropertyDialog = ({ open, onClose, property }: EditPropertyDial
   const onError = (errors: FieldErrors) => {
     Object.values(errors).forEach((error) => {
       if (error?.message) {
-        enqueueSnackbar(error.message as String, { variant: "error" });
+        enqueueSnackbar(error.message as string, { variant: "error" });
       }
     });
   };

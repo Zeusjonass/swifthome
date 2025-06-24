@@ -1,5 +1,6 @@
 import axiosInstance from './_axiosConfig';
 import { Question, Questions } from '../../schemas';
+import { isAxiosError } from 'axios';
 
 export const getClientQuestions = async () => {
   try {
@@ -11,7 +12,7 @@ export const getClientQuestions = async () => {
     const parsedData = Questions.parse(data);
 
     return parsedData;
-  } catch (error: any) {
+  } catch (error) {
     throw error;
   }
 };
@@ -23,7 +24,10 @@ export const updateUserQuestions = async (questions: Question[]) => {
       questions,
     });
     return response.data
-  } catch (error: any) {
-    throw error.response?.data || new Error("Ha ocurrido un error al editar las preguntas");
+  } catch (error) {
+    if (isAxiosError(error)) {
+      throw error.response?.data || new Error("Ha ocurrido un error al editar las preguntas");
+    }
+    throw new Error("Ha ocurrido un error inesperado al editar las preguntas");
   }
 };

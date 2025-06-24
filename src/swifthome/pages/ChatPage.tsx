@@ -12,8 +12,32 @@ interface ChatPageProps {
   userId: string;
 }
 
+interface Property {
+  title: string;
+  price: number;
+  tags: string[];
+  bathrooms: number;
+  bedrooms: number;
+  image: string;
+  link: string;
+  reason: string;
+  rate: number;
+}
+
+interface TextMessage {
+  text: string;
+  sender: 'self' | 'other';
+  time: string;
+}
+
+interface PropertyListMessage {
+  properties: Property[];
+}
+
+type Message = TextMessage | PropertyListMessage;
+
 const ChatPage = ({ sessionId, clientId, userId }: ChatPageProps) => {
-  const [messages, setMessages] = useState<any[]>([
+  const [messages, setMessages] = useState<Message[]>([
     { text: 'Hola, soy Swifty. Tu asistente personal en la búsqueda de la propiedad perfecta', sender: 'other', time: '08:40 am, Hoy' },
   ]);
   const [newMessage, setNewMessage] = useState('');
@@ -24,9 +48,9 @@ const ChatPage = ({ sessionId, clientId, userId }: ChatPageProps) => {
     {
       onSuccess: (data: PostAssistantNewMessageResponse) => {
         setLoading(false);
-        const newMessages = [
+        const newMessages: Message[] = [
           { text: data.initialText, sender: 'other', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ', Hoy' },
-          { properties: data.properties },
+          { properties: data.properties as Property[] },
           { text: data.finalText, sender: 'other', time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ', Hoy' }
         ];
         setMessages(prevMessages => [...prevMessages, ...newMessages]);
@@ -41,7 +65,7 @@ const ChatPage = ({ sessionId, clientId, userId }: ChatPageProps) => {
   const handleSendMessage = async () => {
     if (!sessionId || !clientId || !userId || newMessage.trim().length < 10) return;
     
-    const newMsg = { 
+    const newMsg: Message = { 
       text: newMessage, 
       sender: 'self', 
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + ', Hoy' 
@@ -59,7 +83,7 @@ const ChatPage = ({ sessionId, clientId, userId }: ChatPageProps) => {
     setNewMessage('');
   };
 
-  const handleKeyPress = (event: any) => {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       handleSendMessage();

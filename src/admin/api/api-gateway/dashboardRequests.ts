@@ -1,5 +1,6 @@
 import axiosInstance from './_axiosConfig';
 import { DashBoardInfo, PropertyFormData } from '../../schemas';
+import { isAxiosError } from 'axios';
 
 export const getDashboardData = async () => {
   try {
@@ -23,8 +24,11 @@ export const newProperty = async (property: PropertyFormData) => {
       property,
     });
     return response.data
-  } catch (error: any) {
-    throw error.response?.data || new Error("Ha ocurrido un error al guardar la propiedad");
+  } catch (error: unknown) {
+    if (isAxiosError(error)) {
+      throw error.response?.data || new Error("Ha ocurrido un error al guardar la propiedad");
+    }
+    throw new Error("Ha ocurrido un error inesperado al guardar la propiedad");
   }
 };
 
@@ -35,19 +39,25 @@ export const newProperties = async (properties: PropertyFormData[]) => {
       properties,
     });
     return response.data;
-  } catch (error: any) {
-    throw error.response?.data || new Error("Error al guardar las propiedades");
+  } catch (error: unknown) {
+    if (isAxiosError(error)) {
+      throw error.response?.data || new Error("Error al guardar las propiedades");
+    }
+    throw new Error("Error inesperado al guardar las propiedades");
   }
 };
 
-export const editProperty = async (property: any) => {
+export const editProperty = async (property: unknown) => {
   try {
     const response = await axiosInstance.post("/editProperty", {
       clientId: "12345",
       property,
     });
     return response.data
-  } catch (error: any) {
-    throw error.response?.data.error || new Error("Ha ocurrido un error al editar la propiedad");
+  } catch (error: unknown) {
+    if (isAxiosError(error)) {
+      throw error.response?.data.error || new Error("Ha ocurrido un error al editar la propiedad");
+    }
+    throw new Error("Ha ocurrido un error inesperado al editar la propiedad");
   }
 };

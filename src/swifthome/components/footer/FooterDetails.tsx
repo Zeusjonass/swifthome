@@ -3,6 +3,7 @@ import facebook from '../../icons/facebook.svg'
 import whatsapp from '../../icons/whatsApp.svg'
 import linkedin from '../../icons/linkedin.svg'
 import instagram from '../../icons/instagram.svg'
+import Image from 'next/image';
 
 function FooterDetails() {
 
@@ -113,10 +114,10 @@ function FooterDetails() {
               '&:hover': { bgcolor: '#0957A0' }
             }
           }}>
-            <a href="#"><img src={facebook.src} alt="icono facebook" /></a>
-            <a href="#"><img src={whatsapp.src} alt="icono whatsapp" /></a>
-            <a href="#"><img src={instagram.src} alt="icono instagram" /></a>
-            <a href="#"><img src={linkedin.src} alt="icono linkedin" /></a>
+            <a href="#"><Image src={facebook.src} alt="icono facebook" /></a>
+            <a href="#"><Image src={whatsapp.src} alt="icono whatsapp" /></a>
+            <a href="#"><Image src={instagram.src} alt="icono instagram" /></a>
+            <a href="#"><Image src={linkedin.src} alt="icono linkedin" /></a>
           </Box>
         </Box>
 

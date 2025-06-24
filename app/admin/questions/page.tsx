@@ -24,8 +24,8 @@ const QuestionsView = () => {
       enqueueSnackbar(data.message, { variant: "success" });
       queryClient.invalidateQueries({queryKey: ['clientQuestions']});
     },
-    onError: (error: any) => {
-      enqueueSnackbar(error || "Ha ocurrido un error al editar las preguntas", { variant: "error" });
+    onError: (error) => {
+      enqueueSnackbar(error.message || "Ha ocurrido un error al editar las preguntas", { variant: "error" });
     },
   });
   

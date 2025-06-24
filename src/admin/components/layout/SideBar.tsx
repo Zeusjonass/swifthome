@@ -4,9 +4,6 @@ import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Box, IconButton, useTheme, useMediaQuery } from "@mui/material";
 import { ArrowCircleRightOutlined, DashboardOutlined, EditOutlined, MapsHomeWorkOutlined, QuestionAnswerOutlined, SettingsOutlined, Menu as MenuIcon, ChevronLeft as ChevronLeftIcon } from "@mui/icons-material";
-import { signOut } from "aws-amplify/auth";
-import { useMutation } from "react-query";
-import { deleteThreadAndFile } from "@/src/swifthome/api/api-gateway/assistantFile";
 import { useRouter } from "next/navigation";
 
 interface SideBarProps {
@@ -31,22 +28,8 @@ export const SideBar = ({ drawerWidth, headerHeight }: SideBarProps) => {
     }
   }, [isSmallScreen]);
 
-  const deleteFileMutation = useMutation(deleteThreadAndFile, {
-    onSuccess: () => {
-      localStorage.removeItem('threadAndFileId');
-    },
-    onError: (error) => {
-      console.error("Error removing assistant file", error);
-    }
-  });
-
-  const handleSignOut = async () => {
-    const threadAndFileId = localStorage.getItem('threadAndFileId');
-    if (threadAndFileId) {
-      await deleteFileMutation.mutateAsync(threadAndFileId);
-    }
-    signOut();
-    navigate.push('/');
+  const handleRedirectChat = async () => {
+    navigate.push('/chat');
   };
 
   const dataItems = [
@@ -194,7 +177,7 @@ export const SideBar = ({ drawerWidth, headerHeight }: SideBarProps) => {
         {/* Botón de Logout */}
         <Box sx={{ width: "80%" }}>
           <ListItem
-            onClick={handleSignOut}
+            onClick={handleRedirectChat}
             sx={{
               width: "100%",
               border: "1px solid #E0E0E0",
@@ -203,13 +186,14 @@ export const SideBar = ({ drawerWidth, headerHeight }: SideBarProps) => {
               paddingX: 2,
               display: "flex",
               alignItems: "center",
+              cursor: "pointer",
               justifyContent: isCollapsed ? "center" : "space-between",
               "&:hover": {
                 backgroundColor: "#E0E0E0",
               },
             }}
           >
-            {!isCollapsed && <ListItemText primary="Cerrar sesión" />}
+            {!isCollapsed && <ListItemText primary="Volver al Chat" />}
             <ListItemIcon
               sx={{
                 minWidth: "40px",

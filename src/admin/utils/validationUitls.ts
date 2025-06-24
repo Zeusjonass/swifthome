@@ -10,8 +10,8 @@ export const createNumberValidationRules = (
     value: minValue,
     message: minMessage,
   },
-  validate: (value: any) => {
-    if (isNaN(value)) {
+  validate: (value: unknown) => {
+    if (typeof value !== "number" || isNaN(value)) {
       return "El valor debe ser un número válido";
     }
     return Number(value) >= 0 || "El valor no puede ser negativo";

@@ -1,6 +1,7 @@
 "use client"
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { CartBadge } from "./ui";
+import Image from "next/image";
 
 interface TopPerformingCardProps {
   title: string;
@@ -51,7 +52,7 @@ export const TopPerformingCard = ({ title, image, rateGlobal }: TopPerformingCar
             aspectRatio: "89 / 63",
           }}
         >
-          <img
+          <Image
             src={image}
             alt={title}
             style={{ borderRadius: "16px", width: '100%', height: '100%' }}
@@ -69,7 +70,7 @@ export const TopPerformingCard = ({ title, image, rateGlobal }: TopPerformingCar
         alignItems="center"
         sx={{ width: "30px", mr: isSmallScreen ? "0px" : "30px" }}
       >
-        <img src="/VectorStars.svg" style={{ transform: "scale(1.5)" }} />
+        <Image src="/VectorStars.svg" alt="Vector Stars" style={{ transform: "scale(1.5)" }} />
         <CartBadge
           badgeContent={rateGlobal.toFixed(0)}
           overlap="circular"

@@ -14,7 +14,7 @@ const HomePage = () => {
 
   const [initializeAssistantResponse, setInitializeAssistantResponse] = useState<InitializeAssistantResponse | undefined>(undefined);
 
-  const { data: questions, isLoading } = useQuestionsByUserIdQuery(
+  const { data: questions } = useQuestionsByUserIdQuery(
     user?.userId ?? "",
   );
 

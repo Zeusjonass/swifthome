@@ -79,7 +79,7 @@ const TooltipContent = () => {
                   display: "inline",
                   fontSize: { xs: "0.7rem", md: "1rem" },
                 }}> 
-                {" "}"¿Qué propiedades me recomendarías para una familia mediana?",
+                {" "}&quot;¿Qué propiedades me recomendarías para una familia mediana?&quot;,
               </Typography>
               
               <Typography
@@ -88,7 +88,7 @@ const TooltipContent = () => {
                   display: "inline",
                   fontSize: { xs: "0.7rem", md: "1rem" },
                 }}>
-                {" "}"Recomiéndame 4 propiedades para una persona que...?",
+                  {" "}&quot;Recomiéndame 4 propiedades para una persona que...?&quot;,
               </Typography>
               <Typography
                 sx={{

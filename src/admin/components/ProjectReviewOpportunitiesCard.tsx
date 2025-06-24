@@ -4,6 +4,7 @@ import { ArrowCircleRightOutlined, ArrowOutward, Place } from "@mui/icons-materi
 import { Box, Button, Typography } from "@mui/material"
 import { CartBadge } from "./ui"
 import { Property } from "../schemas";
+import Image from "next/image";
 
 interface ProjectReviewOpportunitiesCardProps {
   isSmallScreen: boolean;
@@ -92,7 +93,7 @@ export const ProjectReviewOpportunitiesCard = ({isSmallScreen, bestProperty}: Pr
             position: "relative",
           }}
         >
-          <img
+          <Image
             src={bestProperty.image}
             alt={bestProperty.title}
             style={{
@@ -131,7 +132,7 @@ export const ProjectReviewOpportunitiesCard = ({isSmallScreen, bestProperty}: Pr
               </Typography>
             </Box>
             <Box display="flex" alignItems="center" sx={{ width: "30px" }}>
-              <img
+              <Image
                 src="/VectorStars.svg"
                 style={{ transform: "scale(1.50)" }}
                 alt="stars"

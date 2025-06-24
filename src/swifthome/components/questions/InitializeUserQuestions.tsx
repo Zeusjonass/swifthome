@@ -1,4 +1,4 @@
-import { Button, Box, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { Button, Box } from '@mui/material';
 import { useMutation } from 'react-query';
 import { initializeUserQuestions } from '../../api/api-gateway/questions';
 import QuestionsCheckboxList from './QuestionsCheckboxList';

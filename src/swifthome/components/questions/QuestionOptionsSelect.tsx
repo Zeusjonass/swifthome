@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from "@mui/material";
 import { Question, QuestionOption } from "../../types/question";
 
 interface QuestionOptionsSelectProps {
@@ -8,7 +8,7 @@ interface QuestionOptionsSelectProps {
 };
 
 const QuestionOptionsSelect = ({ question, selectedOption, onChange }: QuestionOptionsSelectProps) => {
-  const handleChange = (event: any) => {
+  const handleChange = (event: SelectChangeEvent<string | number>) => {
     const selectedValue = event.target.value;
     const selectedQuestionOption = question.options.find(option => 
       option.value === selectedValue
