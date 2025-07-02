@@ -96,12 +96,15 @@ export const ProjectReviewOpportunitiesCard = ({isSmallScreen, bestProperty}: Pr
           <Image
             src={bestProperty.image}
             alt={bestProperty.title}
+            unoptimized={true}
             style={{
               borderRadius: "20px",
               objectFit: "cover",
               width: "100%",
               height: "100%",
             }}
+            width={isColumn ? 600 : 200}
+            height={isColumn ? 150 : 111}
             onError={(e) => (e.currentTarget.src = "/placeholder-image.png")}
           />
         </Box>
@@ -136,6 +139,8 @@ export const ProjectReviewOpportunitiesCard = ({isSmallScreen, bestProperty}: Pr
                 src="/VectorStars.svg"
                 style={{ transform: "scale(1.50)" }}
                 alt="stars"
+                width={30}
+                height={30}
               />
               <CartBadge
                 badgeContent={bestProperty.rateGlobal && bestProperty.rateGlobal.toFixed(0)}

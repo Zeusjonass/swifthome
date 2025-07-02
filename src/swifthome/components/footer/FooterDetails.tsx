@@ -107,6 +107,7 @@ function FooterDetails() {
           <Box sx={{
             display: 'flex',
             gap: '0.50rem',
+            height: '33px',
             justifyContent: 'center',
             '& a': {
               transition: 'all .4s ease-out',
@@ -114,10 +115,10 @@ function FooterDetails() {
               '&:hover': { bgcolor: '#0957A0' }
             }
           }}>
-            <a href="#"><Image src={facebook.src} alt="icono facebook" /></a>
-            <a href="#"><Image src={whatsapp.src} alt="icono whatsapp" /></a>
-            <a href="#"><Image src={instagram.src} alt="icono instagram" /></a>
-            <a href="#"><Image src={linkedin.src} alt="icono linkedin" /></a>
+            <a href="#"><Image src={facebook.src} width={33} height={33} alt="icono facebook" /></a>
+            <a href="#"><Image src={whatsapp.src} width={33} height={33} alt="icono whatsapp" /></a>
+            <a href="#"><Image src={instagram.src} width={33} height={33} alt="icono instagram" /></a>
+            <a href="#"><Image src={linkedin.src} width={33} height={33} alt="icono linkedin" /></a>
           </Box>
         </Box>
 

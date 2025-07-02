@@ -32,6 +32,6 @@ export const initializeAssistantByUserId = async (request: InitializeAssistantRe
 
 export const postAssistantNewMessage = async (request: PostAssistantNewMessageRequest): Promise<PostAssistantNewMessageResponse> => {
   const response = await axiosInstance.post('/newMessageV3', request);
-  console.log(response)
+  // console.log(response)
   return response.data;
 };

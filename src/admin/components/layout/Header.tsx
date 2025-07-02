@@ -9,7 +9,7 @@ export const Header = ({headerHeight}: {headerHeight: number}) => {
       <Toolbar sx={{ backgroundColor: 'white', height: '100%' }}>
         <Box sx={{ flexGrow: 1 }}>
           <a href="#" style={{display: 'inline-block'}}>
-            <Image src="/fostwjj399sm1ozl1e9-1-2.png.webp" alt="Logo" style={{width: '200px'}}/>
+            <Image src="/fostwjj399sm1ozl1e9-1-2.png.webp" alt="Logo" width={200} height={47.72} />
           </a>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center" }}>

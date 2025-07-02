@@ -12,11 +12,12 @@ import { editProperty } from "../api";
 
 interface EditPropertyDialogProps {
   open: boolean;
+  clientId: string;
   onClose: () => void;
   property: Property | null;
 }
 
-export const EditPropertyDialog = ({ open, onClose, property }: EditPropertyDialogProps) => {
+export const EditPropertyDialog = ({ open, onClose, property, clientId }: EditPropertyDialogProps) => {
   const queryClient = useQueryClient();
   const { enqueueSnackbar } = useSnackbar();
   const methods = useForm({
@@ -104,7 +105,7 @@ export const EditPropertyDialog = ({ open, onClose, property }: EditPropertyDial
       dateConstruction: data.dateConstruction ? new Date(data.dateConstruction).getTime() : null,
     };
     const dirtyFieldsToSend = onlyDirtyFields(propertyEdited);
-    mutate(dirtyFieldsToSend);
+    mutate({property: dirtyFieldsToSend, clientId});
   };
 
   const onError = (errors: FieldErrors) => {

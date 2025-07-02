@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 import { SkeletonDashboard, SkeletonQuestions } from "@/src/admin/components";
 import { SkeletonPropertiesTable } from "./SkeletonPropertiesTable";
 import { usePathname } from "next/navigation";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 
 interface DashboardDataProviderProps {
   children: React.ReactNode;
@@ -15,16 +16,17 @@ export const DashboardDataProvider = ({
   children,
 }: DashboardDataProviderProps) => {
   const location = usePathname();
+  const { user } = useAuthenticator((context) => [context.user]);
 
   const { error, isFetching } = useQuery({
     queryKey: ["dashboardData"],
-    queryFn: getDashboardData,
+    queryFn: () => getDashboardData(user?.userId),
     refetchOnWindowFocus: false,
   });
 
   const { error: questionsError, isFetching: isFetchingQuestions } = useQuery({
     queryKey: ["clientQuestions"],
-    queryFn: getClientQuestions,
+    queryFn: () => getClientQuestions(user?.userId ?? ""),
     refetchOnWindowFocus: false,
   });
 

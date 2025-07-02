@@ -7,7 +7,7 @@ import { editProperty } from "../../api";
 import { Property } from "../../schemas";
 
 
-export const PropertyStatusSelect = ({propertyId, status}: {propertyId: string | number; status: string;}) => {
+export const PropertyStatusSelect = ({propertyId, status, clientId}: {propertyId: string | number; status: string; clientId: string}) => {
   const [propertyStatuses, setPropertyStatuses] = useState<{[propertyId: string | number]: string;}>({});
   const {mutate, isPending} = useMutation({
     mutationFn: editProperty,
@@ -28,7 +28,11 @@ export const PropertyStatusSelect = ({propertyId, status}: {propertyId: string |
   }
 
   const handleStatusChange = (propertyId: string | number, newStatus: string ) => {
-    mutate({status: newStatus, propertyId});
+    const updatedProperty = {
+      status: newStatus,
+      propertyId,
+    };
+    mutate({property: updatedProperty, clientId});
   };
 
   const currentStatus = propertyStatuses[propertyId] || status;

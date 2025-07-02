@@ -65,19 +65,19 @@ const PlansBanner: React.FC = () => {
               paddingTop: '1.5rem',
               paddingBottom: '3rem',
               '& .MuiTabs-flexContainer': {
-                justifyContent: isMobile ? 'flex-start' : 'center' },}}>
-        
+                justifyContent: isMobile ? 'flex-start' : 'center' },}}
+        >
           <Tab sx={{'&:focus':{outline:'none'},textTransform:'capitalize',color: '#16273B', fontSize: '1.05rem',fontWeight:'400'}} label="3 meses" />
           <Tab sx={{'&:focus':{outline:'none'},textTransform:'capitalize',color: '#16273B', fontSize: '1.05rem',}} label={
             <Typography component="div" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '.5rem' }}>
               6 meses
-              <Chip label="-15%" size="small" color='info'/>
+              <Chip label="-15%" size="small" color='info' onClick={(e) => e.stopPropagation()} />
             </Typography>
           } />
           <Tab sx={{'&:focus':{outline:'none'},textTransform:'capitalize',color: '#16273B', fontSize: '1.05rem'}} label={
             <Typography component="div" sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '.5rem' }}>
               12 meses
-              <Chip label="-30%" size="small" color='info'/>
+              <Chip label="-30%" size="small" color='info' onClick={(e) => e.stopPropagation()} />
             </Typography>
           } />
         </Tabs>
