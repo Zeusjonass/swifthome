@@ -1,8 +1,9 @@
 "use client"
+import { use, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Box, Typography } from "@mui/material"
 import { SaveOutlined } from "@mui/icons-material";
-import { useState } from "react";
+import { useAuthenticator } from "@aws-amplify/ui-react";
 import { enqueueSnackbar } from "notistack";
 import { Question } from "@/src/admin/schemas";
 import { updateUserQuestions } from "@/src/admin/api";
@@ -15,6 +16,7 @@ const headCells = [
 ];
 
 const QuestionsView = () => {
+  const { user } = useAuthenticator((context) => [context.user]);
   const queryClient = useQueryClient();
   const questions = queryClient.getQueryData<Question[]>(["clientQuestions"]);
   const [questionsState, setQuestionsState] = useState<Question[]>(questions || []);
@@ -36,7 +38,7 @@ const QuestionsView = () => {
   }
 
   const handleSubmit = () => {
-    mutate(questionsState);
+    mutate({ questions: questionsState, userId: user?.userId });
   }
 
   if (isPending) {

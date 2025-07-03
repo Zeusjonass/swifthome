@@ -1,39 +1,37 @@
-"use client";
 import "./globals.css";
-import { Amplify } from "aws-amplify";
-import awsExports from '@/src/swifthome/aws-exports.js';
-import { Authenticator } from "@aws-amplify/ui-react";
-import { useEffect, useState } from "react";
-import { configureAmplify } from "@/src/lib/amplifyClient";
-import { QueryClient, QueryClientProvider } from "react-query";
-import Header from "@/src/swifthome/components/Header";
-import Footer from "@/src/swifthome/components/Footer";
-import { usePathname } from "next/navigation";
+import ClientLayout from './ClientLayout';
 
-Amplify.configure({ ...awsExports });
+export const metadata = {
+  title: "SwiftHome - Tu asistente inmobiliario inteligente",
+  description: "Encuentra la propiedad perfecta con la ayuda de inteligencia artificial",
+  keywords: "inmobiliaria, propiedades, AI, inteligencia artificial, casas, departamentos",
+  authors: [{ name: "Deux Team" }],
+  creator: "Deux",
+  publisher: "Deux",
+  openGraph: {
+    title: "SwiftHome - Tu asistente inmobiliario inteligente",
+    description: "Encuentra la propiedad perfecta con la ayuda de inteligencia artificial",
+    type: "website",
+    locale: "es_ES",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SwiftHome - Tu asistente inmobiliario inteligente",
+    description: "Encuentra la propiedad perfecta con la ayuda de inteligencia artificial",
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  useEffect(() => {
-    configureAmplify();
-  }, []);
-  const location = usePathname();
-  const isViewAdmin = /^\/admin(\/.*)?$/.test(location);
-  const [queryClient] = useState(() => new QueryClient());
-
   return (
     <html lang="es">
       <body>
-        <Authenticator.Provider>
-          <QueryClientProvider client={queryClient}>
-            {!isViewAdmin && <Header />}
-              {children}
-             {!isViewAdmin && <Footer />}
-          </QueryClientProvider>
-        </Authenticator.Provider>
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );

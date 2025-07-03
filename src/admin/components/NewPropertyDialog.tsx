@@ -25,12 +25,14 @@ import CSVUploadButton from "./CSVUploadButton";
 
 interface NewPropertyDialogProps {
   open: boolean;
+  clientId: string;
   onClose: () => void;
 }
 
 export const NewPropertyDialog = ({
   open,
   onClose,
+  clientId
 }: NewPropertyDialogProps) => {
   const [tags, setTags] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -92,7 +94,7 @@ export const NewPropertyDialog = ({
       tags,
       status: "Draft",
     };
-    mutate(formattedProperty);
+    mutate({property: formattedProperty, clientId});
   };
 
   const onError = (errors: FieldErrors) => {
@@ -115,7 +117,7 @@ export const NewPropertyDialog = ({
           overflowY: "unset",
         }}
       >
-        <CSVUploadButton></CSVUploadButton>
+        <CSVUploadButton clientId={clientId}></CSVUploadButton>
         <DialogContentText
           sx={{
             textAlign: isSmallScreen ? "center" : "left",

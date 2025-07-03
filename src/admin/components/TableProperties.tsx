@@ -13,6 +13,7 @@ interface TablePropertiesProps {
 }
 
 export const TableProperties = ({headCells, properties}: TablePropertiesProps) => {
+  const clientId = properties.length > 0 ? properties[0].clientId : "";
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [propertyToEdit, setPropertyToEdit] = useState<Property | null>(null);
 
@@ -54,6 +55,9 @@ export const TableProperties = ({headCells, properties}: TablePropertiesProps) =
                       src={property.image}
                       alt={property.title}
                       style={{ borderRadius: "16px", width: '100%', height: '100%' }}
+                      width={89}
+                      height={63}
+                      unoptimized={true}
                       onError={(e) =>
                         (e.currentTarget.src = "/placeholder-image-min.png")
                       }
@@ -84,6 +88,7 @@ export const TableProperties = ({headCells, properties}: TablePropertiesProps) =
               <PropertyStatusSelect
                 propertyId={property.propertyId!}
                 status={property.status}
+                clientId={clientId}
               />
             </TableCell>
 
@@ -107,6 +112,7 @@ export const TableProperties = ({headCells, properties}: TablePropertiesProps) =
         ))}
       </BaseTable>
       <EditPropertyDialog
+        clientId={clientId}
         open={isDialogOpen}
         onClose={handleCloseDialog}
         property={propertyToEdit}

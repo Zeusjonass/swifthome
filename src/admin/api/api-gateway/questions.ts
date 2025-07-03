@@ -2,10 +2,10 @@ import axiosInstance from './_axiosConfig';
 import { Question, Questions } from '../../schemas';
 import { isAxiosError } from 'axios';
 
-export const getClientQuestions = async () => {
+export const getClientQuestions = async (userId: string) => {
   try {
     const response = await axiosInstance.post("/getClientQuestions", {
-      userId: "f4281488-20b1-7017-61a9-49ef701600a3",
+      userId,
     });
     const data = response.data;
 
@@ -17,10 +17,10 @@ export const getClientQuestions = async () => {
   }
 };
 
-export const updateUserQuestions = async (questions: Question[]) => {
+export const updateUserQuestions = async ({ questions, userId }: { questions: Question[]; userId: string; }) => {
   try {
     const response = await axiosInstance.post("/updateUserQuestions", {
-      userId: "f4281488-20b1-7017-61a9-49ef701600a3",
+      userId,
       questions,
     });
     return response.data

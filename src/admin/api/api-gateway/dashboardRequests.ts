@@ -2,10 +2,10 @@ import axiosInstance from './_axiosConfig';
 import { DashBoardInfo, PropertyFormData } from '../../schemas';
 import { isAxiosError } from 'axios';
 
-export const getDashboardData = async () => {
+export const getDashboardData = async (userId: string) => {
   try {
     const response = await axiosInstance.post('/getPanelInfo', {
-      userId: "f4281488-20b1-7017-61a9-49ef701600a3" //TODO: cambiar esto a dinamico
+      userId
     });
     const data = response.data;
 
@@ -17,10 +17,10 @@ export const getDashboardData = async () => {
   }
 };
 
-export const newProperty = async (property: PropertyFormData) => {
+export const newProperty = async ({property, clientId}: {property: PropertyFormData, clientId: string}) => {
   try {
     const response = await axiosInstance.post("/addProperty", {
-      clientId: "12345",
+      clientId,
       property,
     });
     return response.data
@@ -32,10 +32,10 @@ export const newProperty = async (property: PropertyFormData) => {
   }
 };
 
-export const newProperties = async (properties: PropertyFormData[]) => {
+export const newProperties = async ({properties, clientId}: {properties: PropertyFormData[], clientId: string}) => {
   try {
     const response = await axiosInstance.post("/addBatchProperties", {
-      clientId: "12345",
+      clientId,
       properties,
     });
     return response.data;
@@ -47,10 +47,10 @@ export const newProperties = async (properties: PropertyFormData[]) => {
   }
 };
 
-export const editProperty = async (property: unknown) => {
+export const editProperty = async ({property, clientId}: {property: unknown, clientId: string}) => {
   try {
     const response = await axiosInstance.post("/editProperty", {
-      clientId: "12345",
+      clientId,
       property,
     });
     return response.data

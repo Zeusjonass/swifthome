@@ -19,6 +19,7 @@ interface PropertiesProps {
 }
 
 export const Properties = ({ properties }: PropertiesProps) => {
+  const clientId = properties.length > 0 ? properties[0].clientId : "";
   const [searchPropertie, setSearchPropertie] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -48,7 +49,7 @@ export const Properties = ({ properties }: PropertiesProps) => {
   return (
     <>
       <AddNewPropertyButton onClick={handleAddNewProperty} />
-      <NewPropertyDialog open={isDialogOpen} onClose={handleCloseDialog} />
+      <NewPropertyDialog open={isDialogOpen} onClose={handleCloseDialog} clientId={clientId} />
 
       <Box
         sx={{
