@@ -14,6 +14,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
+import Head from 'next/head';
 
 const drawerWidth = 294;
 const headerHeight = 96;
