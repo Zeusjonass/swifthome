@@ -21,7 +21,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const CSVUploadButton: React.FC = () => {
+const CSVUploadButton: React.FC<{ clientId: string }> = ({ clientId }) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { mutate } = useMutation({
@@ -42,7 +42,7 @@ const CSVUploadButton: React.FC = () => {
 
     try {
       const validRows = await handleCSVUpload(file);
-      mutate(validRows as PropertyFormData[]);
+      mutate({properties: validRows as PropertyFormData[], clientId});
     } catch (error: unknown) {
       if (isAxiosError(error)) {
         enqueueSnackbar(error.message || "Error procesando CSV", {

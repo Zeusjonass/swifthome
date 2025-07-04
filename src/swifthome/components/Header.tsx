@@ -183,7 +183,7 @@ const Header = () => {
       }}>
 
         <Link href="/">
-          <Image src={LogoDeux.src} style={{ width: '7rem', display: 'block' }} alt="logo" />
+          <Image src={LogoDeux.src} style={{ display: 'block' }} alt="logo" width={128} height={30.53}/>
         </Link>
 
         <NavList menu={menu}>

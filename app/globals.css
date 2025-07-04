@@ -42,7 +42,7 @@ html {
 /*Form login*/
 [data-amplify-authenticator] [data-amplify-router] {
   border: none !important;
-  background: none;
+  background-color: transparent !important;
 }
 
 .css-csmqbv-MuiPaper-root-MuiDialog-paper{
