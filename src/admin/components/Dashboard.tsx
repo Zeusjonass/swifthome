@@ -10,6 +10,7 @@ interface DashboardProps {
 }
 
 export const Dashboard = ({data}: DashboardProps) => {
+  const clientId = data.properties.length > 0 ? data.properties[0].clientId : "";
   const user = 'user';
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -80,7 +81,7 @@ export const Dashboard = ({data}: DashboardProps) => {
       </Box>
 
       <AddNewPropertyButton onClick={handleAddNewProperty}/>
-      <NewPropertyDialog open={isDialogOpen} onClose={handleCloseDialog} />
+      <NewPropertyDialog open={isDialogOpen} onClose={handleCloseDialog} clientId={clientId}/>
 
       <StatCardContainer statCardData={statCardData} />
 
