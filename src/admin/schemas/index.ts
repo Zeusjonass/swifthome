@@ -4,6 +4,7 @@ export const QuestionOptions = z.object({
     displayText: z.string(),
     value: z.union([z.number(), z.string()]),
     selected: z.boolean().optional(),
+    custom: z.boolean().optional(),
 });
 
 const Question = z.object({
@@ -17,6 +18,7 @@ const Question = z.object({
     pk: z.string().nullable(),
     displayText: z.string(),
     clientId: z.string().optional(),
+    custom: z.boolean().optional(),
 });
 
 export const QuestionWithSelected = Question.omit({clientId: true, userId: true}).extend({
